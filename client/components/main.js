@@ -44,6 +44,7 @@ const Main = (props) => {
 
 
 
+              <Link to="/profile">
               <Badge
               badgeContent={user.id}
               secondary={true}
@@ -51,7 +52,8 @@ const Main = (props) => {
             <IconButton tooltip="Finished Poems">
               <Avatar >{user.email[0]}</Avatar>
               </IconButton>
-            </Badge>
+              </Badge>
+              </Link>
             </div>
             : <div>
               {/* The navbar will show these links before you log in */}
