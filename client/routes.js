@@ -4,7 +4,7 @@ import {Router} from 'react-router'
 import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome, Home, BuildPoem} from './components'
+import {Main, Login, Signup, UserHome, Home, BuildPoem, CreatePoem} from './components'
 import {me} from './store'
 import { fetchPoems } from './store/poems';
 
@@ -34,6 +34,7 @@ class Routes extends Component {
                 <Switch>
                   {/* Routes placed here are only available after logging in */}
                   <Route path="/build" component={BuildPoem} />
+                  <Route path="/create" component={CreatePoem} />
                 </Switch>
             }
             {/* Displays our Login component as a fallback */}

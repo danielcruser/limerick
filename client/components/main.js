@@ -14,6 +14,10 @@ import {
   pink400,
   purple500,
 } from 'material-ui/styles/colors';
+import Badge from 'material-ui/Badge';
+import IconButton from 'material-ui/IconButton';
+import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
+
 /**
  * COMPONENT
  *  The Main component is our 'picture frame' - it displays the navbar and anything
@@ -35,12 +39,19 @@ const Main = (props) => {
               {/* The navbar will show these links after you log in */}
               <Link to="/">Home</Link>
               <Link to="/build">Build</Link>
+              <Link to="/create"> New</Link>
               <a href="#" onClick={handleClick}>Logout</a>
 
-              <Avatar
-              size={40}>
-              {user.email[0]}
-            </Avatar>
+
+
+              <Badge
+              badgeContent={user.id}
+              secondary={true}
+            >
+            <IconButton tooltip="Finished Poems">
+              <Avatar >{user.email[0]}</Avatar>
+              </IconButton>
+            </Badge>
             </div>
             : <div>
               {/* The navbar will show these links before you log in */}

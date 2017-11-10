@@ -11,7 +11,7 @@ const initialState = {
 };
 
 const getPoemsAction = poems => ({ type: GET_POEMS, poems })
-const postpoemAction = poem => ({ type: POST_POEM, poem });
+const postPoemAction = poem => ({ type: POST_POEM, poem });
 const deletepoemAction = id => ({ type: DELETE_POEM, id });
 const updatepoemAction = poem => ({ type: PUT_POEM, poem });
 
@@ -66,10 +66,10 @@ export const putPoemThunk = poem => {
   }
 }
 
-export const postpoemThunk = (poem) => {
+export const postPoemThunk = (title) => {
   return dispatch => {
     const ObjectToSend = {
-      poem: poem
+      title
     }
     return axios
       .post('/api/poems', ObjectToSend)
@@ -77,8 +77,9 @@ export const postpoemThunk = (poem) => {
         return res.data;
       })
       .then(createpoem => {
-        const action = postpoemAction(createpoem);
+        const action = postPoemAction(createpoem);
         dispatch(action);
+        dispatch(fetchPoems())
 
       })
       .catch(console.error);
