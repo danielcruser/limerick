@@ -23,7 +23,7 @@ class BuildPoem extends Component {
   }
 
   filterUnfinishedPoems(poems){
-    const finishedPoems = poems.filter(poem => poem.lines.length < 5)
+    const finishedPoems = poems.filter(poem => (poem.lines ? poem.lines.length < 5 : false))
     return finishedPoems
   }
 
@@ -35,7 +35,7 @@ class BuildPoem extends Component {
     const randomNumber = Math.floor(Math.random() * unFinishedPoems.length)
     const poemToBuild = unFinishedPoems[randomNumber]
 
-    console.log('postline', this.props.postLine)
+    console.log('postLine', this.props.postLine)
     return (
 
       poemToBuild ?

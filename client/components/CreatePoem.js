@@ -24,7 +24,7 @@ class CreatePoem extends Component {
 
   floatingLabelText="Submit A title!"
   />
-  <RaisedButton type='submit' label="Primary" primary={true} />
+  <RaisedButton type='submit' label="Primary" primary={true}>Submit</RaisedButton>
   </div>
   </form>
   )

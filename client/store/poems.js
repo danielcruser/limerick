@@ -80,7 +80,7 @@ export const postPoemThunk = (title) => {
         const action = postPoemAction(createpoem);
         dispatch(action);
         dispatch(fetchPoems())
-
+        history.push('/build')
       })
       .catch(console.error);
   };
