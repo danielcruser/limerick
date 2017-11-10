@@ -9,6 +9,7 @@ import ListItem from 'material-ui/List/ListItem'
 import  Avatar  from 'material-ui/Avatar'
 import RaisedButton from 'material-ui/RaisedButton'
 import { ActionFavorite, ActionAccessibility } from 'material-ui/svg-icons';
+
 class PoemCard extends Component {
   constructor(props){
     super(props)
@@ -140,7 +141,7 @@ class PoemCard extends Component {
       </CardText>
       <CardActions>
         {aSortedLines.map(line => (
-          <RaisedButton primary key={`${line.text}${line.spot}`}>{line.spot + 1}</RaisedButton>
+          <RaisedButton primary key={`${line.text}${line.spot}`} onClick={() => console.log(line.spot + 1)}>{line.spot + 1}</RaisedButton>
         ))}
         <ActionFavorite onClick={() => console.log('favorite')} />
 

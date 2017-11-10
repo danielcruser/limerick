@@ -6,5 +6,6 @@
 export {default as Main} from './main'
 export {default as UserHome} from './user-home'
 export {Login, Signup} from './auth-form'
-export {Home} from './Home'
+export {default as Home} from './Home'
 export {default as PoemCard} from './PoemCard'
+export {default as BuildPoem} from './BuildPoem'
