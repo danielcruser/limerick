@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import history from './history'
 import {Main, Login, Signup, UserHome, Home, BuildPoem} from './components'
 import {me} from './store'
+import { fetchPoems } from './store/poems';
 
 /**
  * COMPONENT
@@ -19,8 +20,10 @@ class Routes extends Component {
     const {isLoggedIn} = this.props
 
     return (
+
       <Router history={history}>
         <Main>
+
           <Switch>
             {/* Routes placed here are available to all visitors */}
             <Route exact path="/" component={Home} />
@@ -36,6 +39,7 @@ class Routes extends Component {
             {/* Displays our Login component as a fallback */}
             <Route component={Home} />
           </Switch>
+
         </Main>
       </Router>
     )
@@ -45,23 +49,25 @@ class Routes extends Component {
 /**
  * CONTAINER
  */
-const mapState = (state) => {
+const mapStateToProps = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    poems: state.poems.allPoems
   }
 }
 
-const mapDispatch = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     loadInitialData () {
       dispatch(me())
+      dispatch(fetchPoems())
     }
   }
 }
 
-export default connect(mapState, mapDispatch)(Routes)
+export default connect(mapStateToProps, mapDispatchToProps)(Routes)
 
 /**
  * PROP TYPES
