@@ -114,7 +114,7 @@ class PoemCard extends Component {
     ]
     const poem = poemData[0]
     const bPoem = poemData[1]
-    const sortedLines = poem.lines.sort(function(a, b){
+    const aSortedLines = poem.lines.sort(function(a, b){
       return a.spot - b.spot
     })
     const bSortedLines = bPoem.lines.sort(function(a, b) {
@@ -129,20 +129,20 @@ class PoemCard extends Component {
         //avatar={something here}
       />
 
-      <CardTitle title={poem.title} subtitle={poem.createdAt.slice(0,10)} />
+      <CardTitle title={poem.title} subtitle={poem.createdAt.slice(0, 10)} />
       <CardText>
       <List>
-      {sortedLines.map(line => (
+      {aSortedLines.map(line => (
         <ListItem key={line.text} disabled={true}> {line.text} </ListItem>
       ))}
       </List>
 
       </CardText>
       <CardActions>
-        {sortedLines.map(line => (
+        {aSortedLines.map(line => (
           <RaisedButton primary key={`${line.text}${line.spot}`}>{line.spot + 1}</RaisedButton>
         ))}
-        <ActionFavorite onClick={()=> console.log('favorite')}>  </ActionFavorite>
+        <ActionFavorite onClick={() => console.log('favorite')} />
 
       </CardActions>
     </Card>)
