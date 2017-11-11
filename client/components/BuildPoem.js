@@ -17,6 +17,9 @@ class BuildPoem extends Component {
   constructor(){
     super()
     this.filterUnfinishedPoems = this.filterUnfinishedPoems.bind(this)
+    this.sortLines = this.sortLines.bind(this)
+    this.hideHiddenLines = this.hideHiddenLines.bind(this)
+    this.showPreviousLine = this.showPreviousLine.bind(this)
   }
   componentDidMount(){
 
@@ -27,6 +30,24 @@ class BuildPoem extends Component {
     return finishedPoems
   }
 
+  sortLines(poem){
+    const lines = poem.lines.sort((a, b) => a.spot > b.spot)
+    return lines
+  }
+  hideHiddenLines(lines){
+    console.log('in hide, lines', lines)
+    const hiddenLines = lines.slice(0, -1)
+    return hiddenLines.map(line => (
+      <ListItem key={line.text} disabled> Line {line.spot + 1} is hidden until the poem is complete! </ListItem>
+    ))
+  }
+  showPreviousLine(lines){
+    const previousLine = lines.pop()
+    return (
+      <ListItem disabled> {previousLine.text} </ListItem>
+    )
+
+  }
   render(){
 
     const poems = this.props.poems
@@ -35,13 +56,14 @@ class BuildPoem extends Component {
     const randomNumber = Math.floor(Math.random() * unFinishedPoems.length)
     const poemToBuild = unFinishedPoems[randomNumber]
 
-    console.log('postLine', this.props.postLine)
+
     return (
 
-      poemToBuild ?
+      (poemToBuild )   ?
+
       <Card>
       <CardTitle title={poemToBuild.lines.length ? 'Hidden Title': poemToBuild.title }/>
-        <List>
+       {<List>
           {poemToBuild.lines.sort((a, b) => a.spot > b.spot).slice(0, -1)
             .map(line => (
             <ListItem key={line.text} disabled> Line {line.spot + 1} is hidden until the poem is complete! </ListItem>
@@ -50,7 +72,10 @@ class BuildPoem extends Component {
             .map(line => (
             <ListItem key={line.text} disabled> {line.text}</ListItem>
           ))}
-        </List>
+        </List>}
+        {/*console.log('lines', lines)}
+        {this.hideHiddenLines(lines)}
+        {this.showPreviousLine(lines)*/}
         <form onSubmit={(event) => {
           event.preventDefault()
 
@@ -74,7 +99,6 @@ class BuildPoem extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log('state', state)
   return {
     poems: state.poems.allPoems
   }

@@ -12,12 +12,27 @@ import { ActionFavorite, ActionAccessibility } from 'material-ui/svg-icons';
 class PoemCard extends Component {
   constructor(props){
     super(props)
+    this.sortLines = this.sortLines.bind(this)
+    this.showAuthor = this.showAuthor.bind(this)
   }
+
+  // this.handleClick (event){
+
+  // }
+  sortLines(poem){
+    const sortedLines = poem.lines.sort((a, b) => a.spot > b.spot)
+    return sortedLines
+  }
+  showAuthor(line){
+    const user = line.user
+    const userName = user.email.split('@')[0]
+    return userName
+  }
+
   render(){
     const poem = this.props.poem
-
+    const lines = this.sortLines(poem)
     return (
-
       <Card >
       <CardHeader
 
@@ -27,15 +42,16 @@ class PoemCard extends Component {
       <CardTitle title={poem.title} subtitle={poem.createdAt.slice(0, 10)} />
       <CardText>
       <List>
-      {poem.lines.map(line => (
+      {lines.map(line => console.log(line.text))}
+      {lines.map(line => (
         <ListItem key={`${line.text}${line.id}`} disabled={true} > {line.text} </ListItem>
       ))}
       </List>
 
       </CardText>
       <CardActions>
-        {poem.lines.map(line => (
-          <RaisedButton primary key={`${line.text}${line.spot}`} onClick={() => console.log(line.spot + 1)}>{line.spot + 1}</RaisedButton>
+        {lines.map(line => (
+          <RaisedButton primary key={`${line.text}${line.spot}`} onClick={() => console.log(line.userId)}>{this.showAuthor(line)}</RaisedButton>
         ))}
         <ActionFavorite onClick={() => console.log('favorite')} />
 
