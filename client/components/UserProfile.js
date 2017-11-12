@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {fetchProfileThunk} from '../store/profile'
+import List from 'material-ui/List/List'
+import ListItem from 'material-ui/List/ListItem'
 /**
  * COMPONENT
  */
@@ -24,6 +26,11 @@ class UserProfile extends Component  {
      <div> Loading</div> :
     <div>
       <h3>{profile.email.split('@')[0]}'s profile</h3>
+      <List>
+      {profile.lines.map(line => (
+        <ListItem key={line.text + line.spot}>{line.text}</ListItem>
+      ))}
+      </List>
     </div>
   )
   }
