@@ -1,9 +1,11 @@
 const router = require('express').Router()
-const {Poem, Line} = require('../db/models')
+const {Poem, Line, Favorite, User} = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
-  Poem.findAll()
+  Poem.findAll({
+    include: [User]
+  })
     .then(poems => res.json(poems))
     .catch(next)
 })

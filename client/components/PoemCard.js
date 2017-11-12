@@ -37,6 +37,8 @@ class PoemCard extends Component {
   render(){
     const poem = this.props.poem
     const lines = this.sortLines(poem)
+    const favorites = poem.users.filter(user => user.favorite.favorited == true).length
+    console.log('favorites', favorites)
     return (
       <Card >
       <CardHeader
@@ -62,6 +64,7 @@ class PoemCard extends Component {
           <RaisedButton  primary >{this.showAuthor(line)}</RaisedButton>
           </Link>
         ))}
+        <Avatar> {favorites} </Avatar>
         <ActionFavorite onClick={() => console.log('favorite')} />
 
       </CardActions>

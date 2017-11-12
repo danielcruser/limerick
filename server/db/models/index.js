@@ -13,7 +13,7 @@ Line.belongsTo(Poem, {foreignKey: { allowNull: false}})
 User.hasMany(Line)
 Poem.hasMany(Line)
 User.belongsToMany(Poem, {through: Favorite})
-// Poem.belongsToMany(User, {through: Favorite})
+Poem.belongsToMany(User, {through: Favorite})
 /**
  * We'll export all of our models here, so that any time a module needs a model,
  * we can just require it from 'db/models'
