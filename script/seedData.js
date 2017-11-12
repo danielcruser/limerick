@@ -83,8 +83,33 @@ const lineData = [
 
 ]
 
+const favoriteData = [
+  {
+    favorited: true,
+    userId: 1,
+    poemId: 2
+  },
+  {
+    favorited: true,
+    userId: 1,
+    poemId: 3
+  },
+  {
+    favorited: true,
+    userId: 1,
+    poemId: 4
+  },
+  {
+    favorited: true,
+    userId: 2,
+    poemId: 2
+  },
+]
+
+
 
 module.exports = {
   poemData,
-  lineData
+  lineData,
+  favoriteData
 }
