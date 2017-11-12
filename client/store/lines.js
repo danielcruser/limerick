@@ -10,27 +10,27 @@ const initialState = {
   allLines: []
 };
 
-const getLinesAction = Lines => ({ type: GET_LINES, Lines })
-const postLineAction = Line => ({ type: POST_LINE, Line });
+const getLinesAction = lines => ({ type: GET_LINES, lines })
+const postLineAction = line => ({ type: POST_LINE, line });
 const deleteLineAction = id => ({ type: DELETE_LINE, id });
-const updateLineAction = Line => ({ type: PUT_LINE, Line });
+const updateLineAction = line => ({ type: PUT_LINE, line });
 
 export default function (state = initialState, action) {
   const newState = Object.assign({}, state)
   switch (action.type) {
     case GET_LINES:
-      newState.allLines = action.Lines
+      newState.allLines = action.lines
       return newState
     case POST_LINE:
-      newState.allLines = [...newState.allLines, action.Line];
+      newState.allLines = [...newState.allLines, action.line];
       return newState
     case PUT_LINE:
-      newState.allLines = newState.allLines.map(Line => {
-        return +Line.id === +action.Line.id ? action.Line : Line
+      newState.allLines = newState.allLines.map(line => {
+        return +line.id === +action.line.id ? action.line : line
       });
       return newState;
     case DELETE_LINE:
-      newState.allLines = newState.allLines.filter(Line => +Line.id !== +action.id);
+      newState.allLines = newState.allLines.filter(line => +line.id !== +action.id);
       return newState
     default:
       return newState;
@@ -42,18 +42,18 @@ export function fetchLines() {
     return axios
       .get('/api/lines')
       .then(res => res.data)
-      .then(Lines => {
-        const action = getLinesAction(Lines);
+      .then(lines => {
+        const action = getLinesAction(lines);
         dispatch(action);
       })
       .catch(err => console.error(err));
   };
 }
 
-export const putLineThunk = Line => {
+export const putLineThunk = line => {
   return dispatch => {
     return axios
-      .put(`/api/lines/${Line.id}`, Line)
+      .put(`/api/lines/${Line.id}`, line)
       .then(res => {
         return res.data;
       })
@@ -66,13 +66,14 @@ export const putLineThunk = Line => {
   }
 }
 
-export const postLineThunk = (text, poemId, spot) => {
+export const postLineThunk = (text, poemId, spot, userId) => {
   console.log('check here')
   return dispatch => {
     const ObjectToSend = {
       text,
       poemId,
-      spot
+      spot,
+      userId
     }
     return axios
       .post('/api/lines', ObjectToSend)

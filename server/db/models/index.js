@@ -8,9 +8,10 @@ const Poem = require('./poem')
  *
  *    BlogPost.belongsTo(User)
  */
-Poem.hasMany(Line)
 Line.belongsTo(Poem, {foreignKey: { allowNull: false}})
 Line.belongsTo(User, { foreignKey: {allowNull: false}})
+Poem.hasMany(Line)
+User.hasMany(Line)
 /**
  * We'll export all of our models here, so that any time a module needs a model,
  * we can just require it from 'db/models'

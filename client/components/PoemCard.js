@@ -14,6 +14,7 @@ class PoemCard extends Component {
     super(props)
     this.sortLines = this.sortLines.bind(this)
     this.showAuthor = this.showAuthor.bind(this)
+    this.handleUserClick = this.handleUserClick.bind(this)
   }
 
   // this.handleClick (event){
@@ -27,6 +28,11 @@ class PoemCard extends Component {
     const user = line.user
     const userName = user.email.split('@')[0]
     return userName
+  }
+
+  handleUserClick(event){
+    event.preventDefault()
+    console.log(event.target)
   }
 
   render(){
@@ -51,7 +57,7 @@ class PoemCard extends Component {
       </CardText>
       <CardActions>
         {lines.map(line => (
-          <RaisedButton primary key={`${line.text}${line.spot}`} onClick={() => console.log(line.userId)}>{this.showAuthor(line)}</RaisedButton>
+          <RaisedButton  primary key={`${line.text}${line.spot}`} onClick={this.handleUserClick} >{this.showAuthor(line)}</RaisedButton>
         ))}
         <ActionFavorite onClick={() => console.log('favorite')} />
 

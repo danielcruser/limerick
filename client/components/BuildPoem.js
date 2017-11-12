@@ -55,7 +55,8 @@ class BuildPoem extends Component {
 
     const randomNumber = Math.floor(Math.random() * unFinishedPoems.length)
     const poemToBuild = unFinishedPoems[randomNumber]
-
+    const user = this.props.user
+    console.log('user', user)
 
     return (
 
@@ -79,7 +80,7 @@ class BuildPoem extends Component {
         <form onSubmit={(event) => {
           event.preventDefault()
 
-          this.props.postLine(event.target.newLine.value, poemToBuild.id, poemToBuild.lines.length)
+          this.props.postLine(event.target.newLine.value, poemToBuild.id, poemToBuild.lines.length, user.id)
           console.log(event.target.newLine.value)}} >
         <TextField
        // hintText="Hint Text"
@@ -100,13 +101,14 @@ class BuildPoem extends Component {
 
 const mapStateToProps = state => {
   return {
-    poems: state.poems.allPoems
+    poems: state.poems.allPoems,
+    user: state.user
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  postLine: (text, poemId, spot) => {
-    return dispatch(postLineThunk(text, poemId, spot))
+  postLine: (text, poemId, spot, userId) => {
+    return dispatch(postLineThunk(text, poemId, spot, userId))
   }
 
 })
