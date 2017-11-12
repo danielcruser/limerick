@@ -15,6 +15,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
   User.find({
+    attributes: ['id', 'email'],
     where: {
       id: req.params.id
     },
