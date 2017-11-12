@@ -10,6 +10,8 @@ import  Avatar  from 'material-ui/Avatar'
 import RaisedButton from 'material-ui/RaisedButton'
 import { ActionFavorite, ActionAccessibility } from 'material-ui/svg-icons';
 import {fetchProfileThunk} from '../store/profile'
+import {toggleFavoriteThunk} from '../store/favorite'
+
 class PoemCard extends Component {
   constructor(props){
     super(props)
@@ -38,7 +40,9 @@ class PoemCard extends Component {
       poemId,
       userId
     })
-
+    const favorite = {poemId, userId}
+    this.props.toggleFavorite(favorite)
+    console.log('check here')
   }
 
 
@@ -91,7 +95,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => ({
   fetchProfile: (id) => {
     return dispatch(fetchProfileThunk(id))
-  }
+  },
+  toggleFavorite: favorite => dispatch(toggleFavoriteThunk(favorite))
 })
 
 

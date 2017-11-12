@@ -1,6 +1,7 @@
 import axios from 'axios';
 import history from '../history';
 
+const GET_POEM = 'GET_POEM'
 const GET_POEMS = 'GET_POEMS'
 const POST_POEM = 'POST_POEM';
 const DELETE_POEM = 'DELETE_POEM';
@@ -11,6 +12,7 @@ const initialState = {
   allPoems: []
 };
 
+const getPoemAction = poem => ({ type: GET_POEM, poem})
 const getPoemsAction = poems => ({ type: GET_POEMS, poems })
 const postPoemAction = poem => ({ type: POST_POEM, poem });
 const deletePoemAction = id => ({ type: DELETE_POEM, id });
