@@ -57,7 +57,9 @@ class PoemCard extends Component {
       </CardText>
       <CardActions>
         {lines.map(line => (
-          <RaisedButton  primary key={`${line.text}${line.spot}`} onClick={this.handleUserClick} >{this.showAuthor(line)}</RaisedButton>
+          <Link to={`users/${line.userId}`} key={`${line.text}${line.spot}`}>
+          <RaisedButton  primary >{this.showAuthor(line)}</RaisedButton>
+          </Link>
         ))}
         <ActionFavorite onClick={() => console.log('favorite')} />
 
