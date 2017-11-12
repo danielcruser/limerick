@@ -1,18 +1,32 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-
+import {fetchProfileThunk} from '../store/profile'
 /**
  * COMPONENT
  */
-export const UserHome = (props) => {
-  const {email} = props
+class UserProfile extends Component  {
+  constructor(){
+    super()
+  }
+  componentDidMount() {
+    if (this.props.loading) {
+       this.props.fetchProfile(this.props.match.params.id)
+    }
+  }
+  render(){
+  const {profile, loading} = this.props
+    console.log('props', this.props)
 
-  return (
+    return (
+    (loading ) ?
+
+     <div> Loading</div> :
     <div>
-      <h3>Welcome, {email}</h3>
+      <h3>{profile.email.split('@')[0]}'s profile</h3>
     </div>
   )
+  }
 }
 
 /**
@@ -20,15 +34,19 @@ export const UserHome = (props) => {
  */
 const mapState = (state) => {
   return {
-    email: state.user.email
+    profile: state.profile.userProfile,
+    loading: state.profile.loading
   }
 }
 
-export default connect(mapState)(UserHome)
+const mapDispatchToProps = (dispatch) => ({
+  fetchProfile: (id) => {
+    return dispatch(fetchProfileThunk(id))
+  }
+})
+export default connect(mapState, mapDispatchToProps)(UserProfile)
 
 /**
  * PROP TYPES
  */
-UserHome.propTypes = {
-  email: PropTypes.string
-}
+

@@ -5,7 +5,8 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import user from './user'
 import poems from './poems'
 import lines from './lines'
-const reducer = combineReducers({user, poems, lines})
+import profile from './profile'
+const reducer = combineReducers({user, poems, lines, profile})
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
   createLogger({collapsed: true})

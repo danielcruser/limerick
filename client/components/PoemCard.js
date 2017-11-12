@@ -9,12 +9,13 @@ import ListItem from 'material-ui/List/ListItem'
 import  Avatar  from 'material-ui/Avatar'
 import RaisedButton from 'material-ui/RaisedButton'
 import { ActionFavorite, ActionAccessibility } from 'material-ui/svg-icons';
+import {fetchProfileThunk} from '../store/profile'
 class PoemCard extends Component {
   constructor(props){
     super(props)
     this.sortLines = this.sortLines.bind(this)
     this.showAuthor = this.showAuthor.bind(this)
-    this.handleUserClick = this.handleUserClick.bind(this)
+
   }
 
   // this.handleClick (event){
@@ -30,10 +31,8 @@ class PoemCard extends Component {
     return userName
   }
 
-  handleUserClick(event){
-    event.preventDefault()
-    console.log(event.target)
-  }
+
+
 
   render(){
     const poem = this.props.poem
@@ -48,7 +47,7 @@ class PoemCard extends Component {
       <CardTitle title={poem.title} subtitle={poem.createdAt.slice(0, 10)} />
       <CardText>
       <List>
-      {lines.map(line => console.log(line.text))}
+
       {lines.map(line => (
         <ListItem key={`${line.text}${line.id}`} disabled={true} > {line.text} </ListItem>
       ))}
@@ -57,7 +56,9 @@ class PoemCard extends Component {
       </CardText>
       <CardActions>
         {lines.map(line => (
-          <Link to={`users/${line.userId}`} key={`${line.text}${line.spot}`}>
+          <Link to={`users/${line.userId}`} key={`${line.text}${line.spot}`} onClick={() => {
+
+            this.props.fetchProfile(line.userId)}}>
           <RaisedButton  primary >{this.showAuthor(line)}</RaisedButton>
           </Link>
         ))}
@@ -69,6 +70,11 @@ class PoemCard extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  fetchProfile: (id) => {
+    return dispatch(fetchProfileThunk(id))
+  }
+})
 
 
-export default withRouter(connect()(PoemCard))
+export default withRouter(connect(null, mapDispatchToProps)(PoemCard))
