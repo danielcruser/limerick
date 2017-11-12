@@ -15,7 +15,7 @@ class PoemCard extends Component {
     super(props)
     this.sortLines = this.sortLines.bind(this)
     this.showAuthor = this.showAuthor.bind(this)
-
+    this.handleFavoriteClick = this.handleFavoriteClick.bind(this)
   }
 
   // this.handleClick (event){
@@ -31,6 +31,15 @@ class PoemCard extends Component {
     return userName
   }
 
+  handleFavoriteClick(poem){
+    const userId = this.props.user.id
+    const poemId = poem.id
+    console.log('favorited- object to send is: ', {
+      poemId,
+      userId
+    })
+
+  }
 
 
 
@@ -65,11 +74,17 @@ class PoemCard extends Component {
           </Link>
         ))}
         <Avatar> {favorites} </Avatar>
-        <ActionFavorite onClick={() => console.log('favorite')} />
+        <ActionFavorite onClick={() => this.handleFavoriteClick(poem)} />
 
       </CardActions>
     </Card>)
 
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    user: state.user
   }
 }
 
@@ -80,4 +95,4 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 
-export default withRouter(connect(null, mapDispatchToProps)(PoemCard))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PoemCard))

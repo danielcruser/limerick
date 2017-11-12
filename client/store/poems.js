@@ -6,14 +6,16 @@ const POST_POEM = 'POST_POEM';
 const DELETE_POEM = 'DELETE_POEM';
 const PUT_POEM = 'PUT_POEM';
 
+
 const initialState = {
   allPoems: []
 };
 
 const getPoemsAction = poems => ({ type: GET_POEMS, poems })
 const postPoemAction = poem => ({ type: POST_POEM, poem });
-const deletepoemAction = id => ({ type: DELETE_POEM, id });
-const updatepoemAction = poem => ({ type: PUT_POEM, poem });
+const deletePoemAction = id => ({ type: DELETE_POEM, id });
+const updatePoemAction = poem => ({ type: PUT_POEM, poem });
+
 
 export default function (state = initialState, action) {
   const newState = Object.assign({}, state)
@@ -57,10 +59,10 @@ export const putPoemThunk = poem => {
       .then(res => {
         return res.data;
       })
-      .then(changedpoem => {
-        const action = updatepoemAction(changedpoem);
+      .then(changedPoem => {
+        const action = updatePoemAction(changedPoem);
         dispatch(action);
-        history.push(`/poems/${changedpoem.id}`);
+        history.push(`/poems/${changedPoem.id}`);
       })
       .catch(err => console.error(err))
   }
@@ -76,8 +78,8 @@ export const postPoemThunk = (title) => {
       .then(res => {
         return res.data;
       })
-      .then(createpoem => {
-        const action = postPoemAction(createpoem);
+      .then(createdPoem => {
+        const action = postPoemAction(createdPoem);
         dispatch(action);
         dispatch(fetchPoems())
         history.push('/build')
@@ -90,7 +92,7 @@ export const deletepoemThunk = id => {
   return dispatch => {
     return axios.delete(`/api/poems/${id}`)
       .then(() => {
-        const action = deletepoemAction(id);
+        const action = deletePoemAction(id);
         dispatch(action);
       });
   };

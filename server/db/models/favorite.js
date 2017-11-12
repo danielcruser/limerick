@@ -9,8 +9,19 @@ const Favorite = db.define('favorite', {
   },
   favorited: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    defaultValue: false
   }
 })
+
+
+Favorite.toggle = function (id, favorited) {
+  console.log('check here', id, favorited )
+  return Favorite.update({favorited: !favorited}, {
+    where: {
+      id
+    },
+    returning: true
+  })
+}
 
 module.exports = Favorite

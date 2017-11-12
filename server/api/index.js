@@ -4,6 +4,7 @@ module.exports = router
 router.use('/users', require('./users'))
 router.use('/poems', require('./poems'))
 router.use('/lines', require('./lines'))
+router.use('/favorites', require('./favorites'))
 router.use((req, res, next) => {
   const error = new Error('Not Found')
   error.status = 404
