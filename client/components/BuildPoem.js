@@ -35,7 +35,7 @@ class BuildPoem extends Component {
     return lines
   }
   hideHiddenLines(lines){
-    console.log('in hide, lines', lines)
+
     const hiddenLines = lines.slice(0, -1)
     return hiddenLines.map(line => (
       <ListItem key={line.text} disabled> Line {line.spot + 1} is hidden until the poem is complete! </ListItem>
@@ -56,7 +56,7 @@ class BuildPoem extends Component {
     const randomNumber = Math.floor(Math.random() * unFinishedPoems.length)
     const poemToBuild = unFinishedPoems[randomNumber]
     const user = this.props.user
-    console.log('user', user)
+
 
     return (
 
@@ -81,7 +81,7 @@ class BuildPoem extends Component {
           event.preventDefault()
 
           this.props.postLine(event.target.newLine.value, poemToBuild.id, poemToBuild.lines.length, user.id)
-          console.log(event.target.newLine.value)}} >
+          }} >
         <TextField
        // hintText="Hint Text"
         floatingLabelText="Add a Line!"

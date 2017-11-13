@@ -19,7 +19,7 @@ class UserProfile extends Component  {
   }
   render(){
   const {profile, loading} = this.props
-    console.log('props', this.props)
+
 
     return (
     (loading ) ?

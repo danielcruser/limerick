@@ -15,14 +15,20 @@ import {toggleFavoriteThunk} from '../store/favorite'
 class PoemCard extends Component {
   constructor(props){
     super(props)
+    const favorites = this.props.poem.users.filter(user => user.favorite.favorited == true).length
+    this.state = {
+      isUserFavorite: this.props.poem.users.filter(user => user.id === this.props.loggedInUser).filter(user => user.favorite.favorited === true).length === 1,
+      favorites: favorites
+    }
     this.sortLines = this.sortLines.bind(this)
     this.showAuthor = this.showAuthor.bind(this)
     this.handleFavoriteClick = this.handleFavoriteClick.bind(this)
+    this.toggleUserFavorite = this.toggleUserFavorite.bind(this)
   }
 
-  // this.handleClick (event){
+  componentDidMount(){
 
-  // }
+  }
   sortLines(poem){
     const sortedLines = poem.lines.sort((a, b) => a.spot > b.spot)
     return sortedLines
@@ -32,17 +38,24 @@ class PoemCard extends Component {
     const userName = user.email.split('@')[0]
     return userName
   }
+  toggleUserFavorite(){
+    this.state.isUserFavorite ? this.setState({
+      favorites: this.state.favorites - 1
+    }) : this.setState({
+      favorites: this.state.favorites + 1
+    })
+    this.setState({
+      isUserFavorite: !this.state.isUserFavorite
+    })
+  }
 
   handleFavoriteClick(poem){
     const userId = this.props.user.id
     const poemId = poem.id
-    console.log('favorited- object to send is: ', {
-      poemId,
-      userId
-    })
     const favorite = {poemId, userId}
     this.props.toggleFavorite(favorite)
-    console.log('check here')
+    console.log('state', this.state)
+    this.toggleUserFavorite()
   }
 
 
@@ -50,8 +63,10 @@ class PoemCard extends Component {
   render(){
     const poem = this.props.poem
     const lines = this.sortLines(poem)
-    const favorites = poem.users.filter(user => user.favorite.favorited == true).length
-    console.log('favorites', favorites)
+    const loggedInUser = this.props.loggedInUser
+    const numFavorites = this.state.favorites
+    const isUserFavorite = this.state.isUserFavorite
+    console.log('state', this.state)
     return (
       <Card >
       <CardHeader
@@ -77,8 +92,11 @@ class PoemCard extends Component {
           <RaisedButton  primary >{this.showAuthor(line)}</RaisedButton>
           </Link>
         ))}
-        <Avatar> {favorites} </Avatar>
-        <ActionFavorite onClick={() => this.handleFavoriteClick(poem)} />
+        <Avatar> {numFavorites} </Avatar>
+        {this.props.user.id &&
+        <ActionFavorite  onClick={() => this.handleFavoriteClick(poem)} />
+
+        }
 
       </CardActions>
     </Card>)

@@ -15,7 +15,7 @@ const Favorite = db.define('favorite', {
 
 
 Favorite.toggle = function (id, favorited) {
-  console.log('check here', id, favorited )
+
   return Favorite.update({favorited: !favorited}, {
     where: {
       id

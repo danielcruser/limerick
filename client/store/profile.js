@@ -18,7 +18,7 @@ export default function (state = initialState, action) {
     case GET_PROFILE:
       newState.userProfile = action.userProfile
       newState.loading = false
-      console.log('check here')
+
       return newState
     default:
       return newState;

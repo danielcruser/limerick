@@ -19,11 +19,11 @@ class Home extends Component {
 
     const poems = this.props.poems
     const finishedPoems = this.filterFinishedPoems(poems)
-
+    const loggedInUser = this.props.user.id
     return (
 
       <div>
-          {finishedPoems && finishedPoems.map(poem => <PoemCard key={`${poem.title}${poem.id}`} poem={poem}/>)
+          {finishedPoems && finishedPoems.map(poem => <PoemCard key={`${poem.title}${poem.id}`} poem={poem} loggedInUser={loggedInUser} />)
           }
 
 
@@ -36,7 +36,8 @@ class Home extends Component {
 const mapStateToProps = state => {
 
   return {
-    poems: state.poems.allPoems //poems is the reducer in Combine Reducers
+    poems: state.poems.allPoems,
+    user: state.user
   };
 };
 
