@@ -100,7 +100,7 @@ class PoemCard extends Component {
         ))}
         <Avatar style={{backgroundColor: 'white', color: 'black'}}> {numFavorites} </Avatar>
         {this.props.user.id && (this.state.isUserFavorite ?
-        <FontIcon onClick={() => this.handleFavoriteClick(poem)} className='material-icons' style={iconStyles} >favorite</FontIcon>:
+        <FontIcon onClick={() => this.handleFavoriteClick(poem)} className='material-icons' style={iconStyles} >favorite</FontIcon> :
         <FontIcon onClick={() => this.handleFavoriteClick(poem)} className='material-icons' style={iconStyles}>favorite_border</FontIcon>)
 
         }
