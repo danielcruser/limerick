@@ -11,6 +11,12 @@ import RaisedButton from 'material-ui/RaisedButton'
 import { ActionFavorite, ActionAccessibility } from 'material-ui/svg-icons';
 import {fetchProfileThunk} from '../store/profile'
 import {toggleFavoriteThunk} from '../store/favorite'
+import FontIcon from 'material-ui/FontIcon'
+import Chip from 'material-ui/Chip'
+const iconStyles = {
+  fontSize: '2.5em',
+
+}
 
 class PoemCard extends Component {
   constructor(props){
@@ -74,7 +80,7 @@ class PoemCard extends Component {
         //avatar={something here}
       />
 
-      <CardTitle title={poem.title} subtitle={poem.createdAt.slice(0, 10)} />
+      <CardTitle title={poem.title} subtitle={poem.createdAt.slice(0, 10)} subtitleStyle={{fontStyle: 'italic'}}/>
       <CardText>
       <List>
 
@@ -89,12 +95,13 @@ class PoemCard extends Component {
           <Link to={`users/${line.userId}`} key={`${line.text}${line.spot}`} onClick={() => {
 
             this.props.fetchProfile(line.userId)}}>
-          <RaisedButton  primary >{this.showAuthor(line)}</RaisedButton>
+          <RaisedButton  primary>{this.showAuthor(line)}</RaisedButton>
           </Link>
         ))}
-        <Avatar> {numFavorites} </Avatar>
-        {this.props.user.id &&
-        <ActionFavorite  onClick={() => this.handleFavoriteClick(poem)} />
+        <Avatar style={{backgroundColor: 'white', color: 'black'}}> {numFavorites} </Avatar>
+        {this.props.user.id && (this.state.isUserFavorite ?
+        <FontIcon onClick={() => this.handleFavoriteClick(poem)} className='material-icons' style={iconStyles} >favorite</FontIcon>:
+        <FontIcon onClick={() => this.handleFavoriteClick(poem)} className='material-icons' style={iconStyles}>favorite_border</FontIcon>)
 
         }
 

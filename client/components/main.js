@@ -6,18 +6,26 @@ import {logout} from '../store'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Home} from './index.js'
 import Avatar from 'material-ui/Avatar'
-import {
-  blue300,
-  indigo900,
-  orange200,
-  deepOrange300,
-  pink400,
-  purple500,
-} from 'material-ui/styles/colors';
 import Badge from 'material-ui/Badge';
 import IconButton from 'material-ui/IconButton';
 import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { brown100, blueGrey400, redA100, grey900, blueGrey300, brown300, cyan50, red600, black }from 'material-ui/styles/colors'
+import { Paper } from 'material-ui';
+import Chip from 'material-ui/Chip'
 
+const muiTheme = getMuiTheme({
+  palette: {
+    textColor: grey900,
+    primary1Color: blueGrey300,
+    canvasColor: brown300,
+    Avatar: black
+
+  },
+  appBar: {
+    height: 50,
+  },
+});
 /**
  * COMPONENT
  *  The Main component is our 'picture frame' - it displays the navbar and anything
@@ -28,8 +36,8 @@ const Main = (props) => {
   const {children, handleClick, isLoggedIn, user} = props
 
   return (
-    <MuiThemeProvider>
-    <div>
+    <MuiThemeProvider muiTheme={muiTheme}>
+    <Paper rounded={false}>
       <h1>Limerick</h1>
 
       <nav>
@@ -37,6 +45,7 @@ const Main = (props) => {
           isLoggedIn
             ? <div>
               {/* The navbar will show these links after you log in */}
+
               <Link to="/">Home</Link>
               <Link to="/build">Build</Link>
               <Link to="/create"> New</Link>
@@ -44,16 +53,16 @@ const Main = (props) => {
 
 
 
+              {/*<Badge
               <Link to="/profile">
-              <Badge
               badgeContent={user.id}
               secondary={true}
-            >
-            <IconButton tooltip="Finished Poems">
-              <Avatar >{user.email[0]}</Avatar>
-              </IconButton>
+              <IconButton tooltip="Finished Poems">*/}
+              <Chip style={{backgroundColor: 'white', color: 'black', display: 'inline-block'}}>{user.email.split('@')[0]}</Chip>
+              {/*</IconButton>
               </Badge>
               </Link>
+            >*/}
             </div>
             : <div>
               {/* The navbar will show these links before you log in */}
@@ -66,7 +75,7 @@ const Main = (props) => {
       </nav>
       <hr />
       {children}
-    </div>
+    </Paper>
     </MuiThemeProvider>
   )
 }

@@ -9,6 +9,7 @@ class Home extends Component {
   constructor(){
     super()
     this.filterFinishedPoems = this.filterFinishedPoems.bind(this)
+
   }
 
   filterFinishedPoems(poems){
@@ -16,7 +17,7 @@ class Home extends Component {
     return finishedPoems
   }
   render(){
-
+    // this.props.fetchPoems
     const poems = this.props.poems
     const finishedPoems = this.filterFinishedPoems(poems)
     const loggedInUser = this.props.user.id

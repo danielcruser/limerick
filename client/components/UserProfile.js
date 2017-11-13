@@ -5,6 +5,8 @@ import {fetchProfileThunk} from '../store/profile'
 import List from 'material-ui/List/List'
 import ListItem from 'material-ui/List/ListItem'
 import {Link} from 'react-router-dom'
+import Card from 'material-ui/Card/Card'
+
 /**
  * COMPONENT
  */
@@ -28,8 +30,8 @@ class UserProfile extends Component  {
     <div>
       <h3>{profile.email.split('@')[0]}'s profile</h3>
       <List>
-      {profile.lines.map(line => (
-        <ListItem key={line.text + line.spot}><Link to={`/poems/${line.poemId}`}>{line.text}</Link></ListItem>
+      {profile.lines.map(line => (<Card>
+        <ListItem key={line.text + line.spot}>{/*<Link to={`/poems/${line.poemId}`}>*/}{line.text}{/*</Link>*/}</ListItem></Card>
       ))}
       </List>
     </div>
