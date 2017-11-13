@@ -13,6 +13,7 @@ import {fetchProfileThunk} from '../store/profile'
 import {toggleFavoriteThunk} from '../store/favorite'
 import FontIcon from 'material-ui/FontIcon'
 import Chip from 'material-ui/Chip'
+
 const iconStyles = {
   fontSize: '2.5em',
 

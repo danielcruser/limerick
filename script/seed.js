@@ -9,7 +9,7 @@
  *
  * Now that you've got the main idea, check it out in practice below!
  */
-const { poemData, lineData, favoriteData } = require('./seedData')
+const { poemData, lineData, favoriteData, userData } = require('./seedData')
 const db = require('../server/db')
 const {User, Poem, Line, Favorite} = require('../server/db/models')
 
@@ -18,10 +18,7 @@ async function seed () {
   console.log('db synced!')
   // Whoa! Because we `await` the promise that db.sync returns, the next line will not be
   // executed until that promise resolves!
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  const users = await User.bulkCreate(userData)
   const poems = await Poem.bulkCreate(poemData)
   const lines = await Line.bulkCreate(lineData)
   const favorites = await Favorite.bulkCreate(favoriteData)

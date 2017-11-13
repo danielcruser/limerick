@@ -31,7 +31,7 @@ class UserProfile extends Component  {
       <h3>{profile.email.split('@')[0]}'s profile</h3>
       <List>
       {profile.lines.map(line => (<Card>
-        <ListItem key={line.text + line.spot}>{/*<Link to={`/poems/${line.poemId}`}>*/}{line.text}{/*</Link>*/}</ListItem></Card>
+        <ListItem key={line.text + line.spot}>{/*<Link to={`/poems/${line.poemId}`}>*/}{line.text} {/*</Link>*/}</ListItem></Card>
       ))}
       </List>
     </div>
@@ -45,7 +45,7 @@ class UserProfile extends Component  {
 const mapState = (state) => {
   return {
     profile: state.profile.userProfile,
-    loading: state.profile.loading
+    loading: state.profile.loading,
   }
 }
 

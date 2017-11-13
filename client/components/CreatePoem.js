@@ -15,7 +15,7 @@ class CreatePoem extends Component {
 
   render(){
     return (
-      <form onSubmit={(event)=>{
+      <form style={{display: 'flex'}} onSubmit={(event)=>{
         event.preventDefault()
         this.props.postPoem(event.target.newPoem.value)
       }}>
@@ -24,7 +24,7 @@ class CreatePoem extends Component {
 
   floatingLabelText="Submit A title!"
   />
-  <RaisedButton type='submit' label="Primary" primary={true}>Submit</RaisedButton>
+  <button type='submit' style={{}} primary={true}>Submit</button>
   </div>
   </form>
   )

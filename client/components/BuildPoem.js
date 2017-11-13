@@ -13,6 +13,7 @@ import TextField from 'material-ui/TextField'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import {postLineThunk} from '../store/lines'
 import {fetchPoems} from '../store/poems'
+import FontIcon from 'material-ui/FontIcon'
 class BuildPoem extends Component {
   constructor(){
     super()
@@ -89,9 +90,9 @@ class BuildPoem extends Component {
 
         name="newLine"
       />
-      <FloatingActionButton type='submit' >
-
-      </FloatingActionButton>
+      <button type='submit' >
+          Submit
+      </button>
       </form>
       </Card> : <div>no poems :(   ... go create one :)</div>
     )
